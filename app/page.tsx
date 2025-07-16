@@ -609,8 +609,11 @@ export default function Dashboard() {
       const response = await fetch(`/api/stocks?symbols=${symbols}`);
       
       if (!response.ok) {
-        throw new Error('Failed to fetch stock data');
+        console.warn('Stock data fetch failed:', response.statusText);
+        setError('Unable to update stock data. Showing cached data.');
+        return;
       }
+
       
       const stockData = await response.json();
       
