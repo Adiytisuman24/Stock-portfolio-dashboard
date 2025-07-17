@@ -5,7 +5,7 @@ A comprehensive real-time portfolio dashboard built with Next.js, React, TypeScr
 ## 🚀 Features
 
 ### Core Functionality
-- **Real-time Stock Data**: Live updates every 15 seconds from Yahoo Finance and Google Finance
+- **Real-time Stock Data**: Live updates every 15 seconds from Yahoo Finance or Google Finance
 - **Comprehensive Portfolio Table**: All columns as specified including Particulars, Purchase Price, Quantity, Investment, Portfolio %, NSE/BSE, CMP, Present Value, Gain/Loss, P/E Ratio, and Latest Earnings
 - **Sector Grouping**: Organize holdings by sector with detailed summaries
 - **Excel Import**: Upload and parse portfolio data from Excel files
