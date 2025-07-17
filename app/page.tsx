@@ -35,10 +35,10 @@ export default function Dashboard() {
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const [autoRefresh, setAutoRefresh] = useState(true);
 
-  // Sample portfolio data based on the Excel file
+  
   const initializePortfolio = useCallback(() => {
     const sampleStocks: Stock[] = [
-      // Financial Sector
+      
       {
         id: '1',
         name: 'HDFC Bank',
@@ -129,7 +129,6 @@ export default function Dashboard() {
         earnings: '₹450 Cr',
         lastUpdated: new Date()
       },
-      // Technology Sector
       {
         id: '6',
         name: 'Affle India',
@@ -293,7 +292,6 @@ export default function Dashboard() {
         earnings: '₹5,600 Cr',
         lastUpdated: new Date()
       },
-      // Power Sector
       {
         id: '15',
         name: 'Tata Power',
@@ -366,7 +364,6 @@ export default function Dashboard() {
         earnings: '₹450 Cr',
         lastUpdated: new Date()
       },
-      // Pipe Sector
       {
         id: '19',
         name: 'Hariom Pipe Industries',
@@ -421,7 +418,6 @@ export default function Dashboard() {
         earnings: '₹8,900 Cr',
         lastUpdated: new Date()
       },
-      // Others
       {
         id: '22',
         name: 'Clean Science',
@@ -512,7 +508,7 @@ export default function Dashboard() {
         earnings: '₹8,500 Cr',
         lastUpdated: new Date()
       },
-      // Additional stocks from the red section
+     
       {
         id: '27',
         name: 'Infosys',
@@ -569,21 +565,21 @@ export default function Dashboard() {
       }
     ];
 
-    // Calculate portfolio totals
+    
     const totalInvestment = sampleStocks.reduce((sum, stock) => sum + stock.investment, 0);
     const currentValue = sampleStocks.reduce((sum, stock) => sum + stock.presentValue, 0);
     const totalGainLoss = currentValue - totalInvestment;
     const totalGainLossPercent = (totalGainLoss / totalInvestment) * 100;
 
-    // Update portfolio percentages
+    
     sampleStocks.forEach(stock => {
       stock.portfolioPercent = (stock.investment / totalInvestment) * 100;
       
-      // Generate enhanced financial metrics
+    
       const enhancedMetrics = generateEnhancedMetrics(stock);
       Object.assign(stock, enhancedMetrics);
       
-      // Generate AI recommendation
+      
       const aiRec = generateAIRecommendation(stock);
       stock.aiRecommendation = aiRec.action;
       stock.aiRecommendationReason = aiRec.reason;
@@ -617,7 +613,7 @@ export default function Dashboard() {
       
       const stockData = await response.json();
       
-      // Update stocks with new data
+      
       const updatedStocks = portfolio.stocks.map(stock => {
         const newData = stockData[stock.symbol];
         if (newData) {
@@ -637,7 +633,7 @@ export default function Dashboard() {
             lastUpdated: new Date()
           };
           
-          // Update AI recommendation based on new data
+          
           const aiRec = generateAIRecommendation(updatedStock);
           updatedStock.aiRecommendation = aiRec.action;
           updatedStock.aiRecommendationReason = aiRec.reason;
@@ -647,7 +643,7 @@ export default function Dashboard() {
         return stock;
       });
 
-      // Recalculate portfolio totals
+     
       const totalInvestment = updatedStocks.reduce((sum, stock) => sum + stock.investment, 0);
       const currentValue = updatedStocks.reduce((sum, stock) => sum + stock.presentValue, 0);
       const totalGainLoss = currentValue - totalInvestment;
@@ -670,7 +666,7 @@ export default function Dashboard() {
     }
   }, [portfolio.stocks]);
 
-  // Auto-refresh every 15 seconds
+ 
   useEffect(() => {
     if (autoRefresh && portfolio.stocks.length > 0) {
       const interval = setInterval(fetchStockData, 15000);
@@ -678,12 +674,12 @@ export default function Dashboard() {
     }
   }, [autoRefresh, fetchStockData, portfolio.stocks.length]);
 
-  // Initialize portfolio on component mount
+  
   useEffect(() => {
     initializePortfolio();
   }, [initializePortfolio]);
 
-  // Generate sector summaries
+ 
   const getSectorSummaries = (): SectorSummaryType[] => {
     const sectorMap = new Map<string, SectorSummaryType>();
 
@@ -707,7 +703,7 @@ export default function Dashboard() {
       }
     });
 
-    // Calculate percentages
+    
     const sectors = Array.from(sectorMap.values());
     sectors.forEach(sector => {
       sector.gainLossPercent = (sector.gainLoss / sector.totalInvestment) * 100;
@@ -717,9 +713,8 @@ export default function Dashboard() {
     return sectors.sort((a, b) => b.currentValue - a.currentValue);
   };
 
-  // Stock recommendations data
   const stockRecommendations: StockRecommendation[] = [
-    // Top Performers (20%+ gains)
+   
     { stock: 'KPIT Tech', gainPercent: 89.47, remarks: 'High return, but now overvalued. Consider partial profit booking.', action: 'book-profit' },
     { stock: 'Polycab', gainPercent: 80.0, remarks: 'Excellent growth and fundamentals. Continue to hold/add on dips.', action: 'hold' },
     { stock: 'Tata Power', gainPercent: 59.09, remarks: 'Stable growth, still has long-term potential in renewables. Hold.', action: 'hold' },
@@ -731,8 +726,7 @@ export default function Dashboard() {
     { stock: 'Infosys', gainPercent: 20.83, remarks: 'Stable IT giant with consistent performance. Hold.', action: 'hold' },
     { stock: 'Gravita India', gainPercent: 20.83, remarks: 'Good recycling business model. Hold for long term.', action: 'hold' },
     { stock: 'Deepak Nitrite', gainPercent: 20.45, remarks: 'Strong chemical company with good prospects. Hold.', action: 'hold' },
-    
-    // Moderate Performers (0-20% gains)
+  
     { stock: 'HDFC Bank', gainPercent: 22.07, remarks: 'Underperformed peers. Wait for re-rating. Hold.', action: 'hold' },
     { stock: 'Astral Limited', gainPercent: 18.92, remarks: 'Good pipe company with steady growth. Hold.', action: 'hold' },
     { stock: 'Suzlon Energy', gainPercent: 18.42, remarks: 'Turnaround stock, high risk. Exit, better alternatives.', action: 'exit' },
@@ -743,7 +737,7 @@ export default function Dashboard() {
     { stock: 'Bajaj Auto', gainPercent: 11.76, remarks: 'Auto sector recovery play. Hold for medium term.', action: 'hold' },
     { stock: 'Happiest Minds', gainPercent: 8.24, remarks: 'Small IT company with potential. Hold.', action: 'hold' },
     
-    // Under Performers (losses)
+
     { stock: 'DMart', gainPercent: -7.89, remarks: 'Valuation too high; Exit. Better FMCG plays exist.', action: 'exit' },
     { stock: 'Clean Science', gainPercent: -8.33, remarks: 'Temporary weakness in specialty chemicals. Hold.', action: 'hold' },
     { stock: 'EaseMyTrip', gainPercent: -15.56, remarks: 'Travel sector still recovering. Hold for recovery.', action: 'hold' },
@@ -756,7 +750,7 @@ export default function Dashboard() {
     { stock: 'Gensol', gainPercent: -62.5, remarks: 'Too volatile, poor cash flow. Exit immediately.', action: 'exit' }
   ];
 
-  // Sector allocation recommendations
+  
   const sectorAllocations: SectorAllocation[] = [
     { sector: 'Financial Sector', currentAllocation: 25, idealAllocation: '30–35% (reduce small caps)' },
     { sector: 'Information Technology', currentAllocation: 28, idealAllocation: '20–25% (consolidate winners only)' },
@@ -770,7 +764,7 @@ export default function Dashboard() {
     const file = event.target.files?.[0];
     if (file) {
       console.log('Excel file uploaded:', file.name);
-      // In a real implementation, you would parse the Excel file here
+      
       initializePortfolio();
     }
   };
@@ -782,7 +776,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto p-6">
-        {/* Header */}
+      
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Portfolio Dashboard</h1>
@@ -826,7 +820,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Data Sources Info */}
+        
         <Card className="mb-6 bg-blue-50 border-blue-200">
           <CardContent className="pt-6">
             <div className="flex items-start gap-3">
@@ -839,7 +833,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        {/* Error State */}
+        
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
             <AlertTriangle className="h-4 w-4 text-red-600" />
@@ -847,7 +841,7 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Last Updated */}
+       
         {lastUpdated && (
           <div className="mb-6 text-sm text-gray-500 flex items-center gap-2">
             <RefreshCw className="h-4 w-4" />
@@ -856,10 +850,9 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Portfolio Stats */}
         <PortfolioStats portfolio={portfolio} loading={loading} />
 
-        {/* Sector Analysis */}
+       
         <div className="mb-8">
           <SectorAnalysis 
             sectorSummaries={getSectorSummaries()}
@@ -868,12 +861,12 @@ export default function Dashboard() {
           />
         </div>
 
-        {/* Portfolio Table */}
+        
         <div className="mb-8">
           <PortfolioTable stocks={portfolio.stocks} loading={loading} />
         </div>
 
-        {/* Technical Notes */}
+        
         <Card className="mb-8 bg-yellow-50 border-yellow-200">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-yellow-800">
@@ -884,7 +877,7 @@ export default function Dashboard() {
           
         </Card>
 
-        {/* Disclaimer */}
+        
         <div className="bg-gray-100 border border-gray-300 rounded-lg p-4">
           <p className="text-sm text-gray-700">
             <strong>Disclaimer:</strong> This portfoilio is made by adiytisuman for test purposes not valid for real time drag and drop analytics of your portfolio.
