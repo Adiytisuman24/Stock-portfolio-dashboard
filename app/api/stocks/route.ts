@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getSerpApiClient, getFallbackStockData, SerpApiStockData } from '@/lib/serpapi-client';
 
-// Cache to prevent excessive API calls
+
 let cache: { data: any; timestamp: number } | null = null;
-const CACHE_DURATION = 15000; // 15 seconds
+const CACHE_DURATION = 15000; 
 
 export async function GET(request: Request) {
   try {
@@ -16,19 +16,19 @@ export async function GET(request: Request) {
     
     const symbols = symbolsParam.split(',');
     
-    // Check cache
+    
     if (cache && Date.now() - cache.timestamp < CACHE_DURATION) {
       return NextResponse.json(cache.data);
     }
     
-    // Get SerpAPI client
+    
     const serpApiClient = getSerpApiClient();
     
-    // Fetch data from Google Finance via SerpAPI
+    
     const combinedData: { [key: string]: any } = {};
     
     try {
-      // Try to fetch live data from SerpAPI
+      
       const serpApiData = await serpApiClient.fetchMultipleStocks(symbols);
       
       symbols.forEach(symbol => {
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
             lastUpdated: liveData.lastUpdated
           };
         } else {
-          // Use cached data if available
+          
           const cachedData = serpApiClient.getCachedData(symbol);
           if (cachedData) {
             combinedData[symbol] = {
@@ -62,7 +62,7 @@ export async function GET(request: Request) {
               lastUpdated: cachedData.lastUpdated
             };
           } else {
-            // Fallback to demo data
+            
             const fallbackData = getFallbackStockData(symbol);
             combinedData[symbol] = {
               symbol,
@@ -81,7 +81,7 @@ export async function GET(request: Request) {
     } catch (error) {
       console.error('Error fetching SerpAPI data:', error);
       
-      // Fallback to demo data for all symbols
+      
       symbols.forEach(symbol => {
         const fallbackData = getFallbackStockData(symbol);
         combinedData[symbol] = {
@@ -98,7 +98,7 @@ export async function GET(request: Request) {
       });
     }
     
-    // Update cache
+    
     cache = {
       data: combinedData,
       timestamp: Date.now()
