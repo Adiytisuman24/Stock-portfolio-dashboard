@@ -1,4 +1,4 @@
-// Stock data fetching utilities
+
 import yahooFinance from 'yahoo-finance2';
 
 export interface YahooStockData {
@@ -17,12 +17,10 @@ export interface GoogleFinanceData {
   revenue?: string;
 }
 
-// Yahoo Finance data fetcher
 export async function fetchYahooFinanceData(symbols: string[]): Promise<Map<string, YahooStockData>> {
   const results = new Map<string, YahooStockData>();
   
   try {
-    // Batch fetch quotes for better performance
     const quotes = await yahooFinance.quote(symbols);
     
     if (Array.isArray(quotes)) {
@@ -51,7 +49,6 @@ export async function fetchYahooFinanceData(symbols: string[]): Promise<Map<stri
   } catch (error) {
     console.error('Error fetching Yahoo Finance data:', error);
     
-    // Fallback with simulated data for demo
     symbols.forEach(symbol => {
       const basePrice = getBasePriceForSymbol(symbol);
       results.set(symbol, {
@@ -67,12 +64,9 @@ export async function fetchYahooFinanceData(symbols: string[]): Promise<Map<stri
   return results;
 }
 
-// Google Finance data scraper (simplified version)
 export async function fetchGoogleFinanceData(symbols: string[]): Promise<Map<string, GoogleFinanceData>> {
   const results = new Map<string, GoogleFinanceData>();
   
-  // In a real implementation, this would scrape Google Finance
-  // For demo purposes, we'll simulate the data
   symbols.forEach(symbol => {
     results.set(symbol, {
       symbol,
@@ -85,7 +79,6 @@ export async function fetchGoogleFinanceData(symbols: string[]): Promise<Map<str
   return results;
 }
 
-// Helper function to get base prices for known symbols
 function getBasePriceForSymbol(symbol: string): number {
   const basePrices: { [key: string]: number } = {
     'HDFCBANK.NS': 1770,
