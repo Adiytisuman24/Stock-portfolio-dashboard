@@ -3,7 +3,7 @@
 A comprehensive real-time portfolio dashboard built with Next.js, React, TypeScript, and TailwindCSS that displays stock holdings with live updates for Current Market Price (CMP), P/E ratio, and earnings data from Yahoo Finance and Google Finance.
 
 link of the hosted app: https://stock-managment-dashboard.vercel.app/
-This code fetches failed errors but the other done doesnt fetch errors which has everything fixed from a to z and we couldnt do the vercel deploy and link of this file is here : https://github.com/Adiytisuman24/Stock-managment-dashboard
+This code fetches failed errors but the other one doesnt fetch errors which has everything fixed from a to z and we couldnt do the vercel deploy and u can see the api failed errors and can go through the images provided below and link of this file is here : https://github.com/Adiytisuman24/Stock-managment-dashboard
 ## 🚀 Features
 
 ### Core Functionality
