@@ -309,4 +309,4 @@ Photos and supporting images for the same
 <img width="1884" height="593" alt="Screenshot 2025-07-15 212148" src="https://github.com/user-attachments/assets/c91c4517-6ad0-4148-a7cf-d232326ad6d7" />
 <img width="1874" height="946" alt="Screenshot 2025-07-15 212208" src="https://github.com/user-attachments/assets/71d555a1-721c-4bd1-a3f8-2bcaa8bd2cf5" />
 
-**Disclaimer**: This application is for educational purposes only. Stock prices and financial data are indicative and should not be used for actual investment decisions. Always consult with financial advisors and verify data with official sources before making investment decisions.
+**Disclaimer**: This application is for educational purposes only. Stock prices and financial data are indicative and should not be used for actual investment analysis. Always consult with financial advisors and verify data with official sources before making investment decisions.
